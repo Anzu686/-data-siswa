@@ -33,9 +33,9 @@
                     <div class="card-body">
                         <table class="table table-striped ">
                           <thead>
-                            <th>Gambar</th>
                             <th>NIS</th>
                             <th>Nama</th>
+                            <th>Jenis Kelamin</th>
                             <th>Jurusan</th>
                             <th>aksi</th>
                           </thead>
@@ -44,14 +44,15 @@
                        
                         @foreach ($siswas as $siswa)
                             <tr>
-                              <td>{{ Storage::url('/'). $siswa->image }}</td>
                               <td>{{ $siswa->nis }}</td>
                               <td>{{ $siswa->name }}</td>
+                              <td>{{ $siswa->jk }}</td>
                               <td>{{ $siswa->jurusan->name }}</td>
                               <td>
-                              <form action="{{ route('siswa.destroy', $siswa->id) }}" method="post">
+                              <form action="{{ route('siswa.destroy', $siswa->id) }}" method="post" onsubmit="return confirm('yakin?')">
                                 @csrf
-                                <a href="{{ route('siswa.edit', $siswa->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                <a href="{{ route('siswa.show', $siswa->id) }}" class="btn btn-primary btn-sm">Lihat</a>
+                                <a href="{{ route('siswa.edit', $siswa->id) }}" class="btn btn-success btn-sm">Edit</a>
                                 @method('DELETE')
                                 <button class="btn btn-danger btn-sm">Hapus</button>
                               </form>

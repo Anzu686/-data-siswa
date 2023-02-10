@@ -18,6 +18,7 @@ return new class extends Migration
             $table->id();
             $table->string('image');
             $table->string('name');
+            $table->string('jk');
             $table->string('nis');
             $table->foreignId('jurusan_id');
             $table->timestamps();

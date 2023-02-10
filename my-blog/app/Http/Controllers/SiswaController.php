@@ -14,12 +14,20 @@ class SiswaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        
         $siswa = Siswa::all();
 
-        if(request('search')){
-            $siswa=Siswa::all()->where('name', 'LIKE', '%' . request('search') . '%');
+        if($request->search){
+          
+            $siswa =Siswa::where([
+                    [function ($query) use ($request) {
+                    if (($s = $request->search)) {
+                        $query->Where('name', 'LIKE', '%' . $s . '%');
+                             }
+                }]
+            ]);
        }
         //
         return view('siswa.index', [
@@ -51,10 +59,10 @@ class SiswaController extends Controller
     {
         //
         // dd($request);
-        // $this->validate($request, [
-        //     'image' => 'required|mimes:svg,jpg,png,|size:10000',
-        //     'name'=>'required|min:3'
-        // ]);
+        $this->validate($request, [
+            'image' => 'image|mimes:jpg,png,jpeg,gif,svg',
+            'name'=>'required|'
+        ]);
 
         $image=$request->file('image')->store('foto-siswa');
 
@@ -62,6 +70,7 @@ class SiswaController extends Controller
             'image'=>$image,
             'nis'=>$request->nis,
             'name'=>$request->name,
+            'jk'=>$request->jk,
             'jurusan_id'=>$request->jurusan_id
         ]);
         return to_route('siswa.index')->with('success', 'Data Berasil Di Tambah');
@@ -73,8 +82,9 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Siswa $siswa)
     {
+        return view('siswa.profil',[ 'siswa'=>$siswa]);
         //
     }
 
@@ -103,12 +113,19 @@ class SiswaController extends Controller
     {
         //
         if($request->hasFile('image')){
+
+            $this->validate($request, [
+            'image' => 'image|mimes:jpg,png,jpeg,gif,svg',
+            'name'=>'required|'
+        ]);
+
             $image=$request->file('image');
             $image->store('foto-siswa');
 
             $siswa->update([
                 'image'=>$image,
                 'nis'=>$request->nis,
+                'jk'=>$request->jk,
                 'name'=>$request->name,
                 'jurusan_id'=>$request->jurusan_id
             ]);
@@ -118,6 +135,7 @@ class SiswaController extends Controller
 
                 'nis' => $request->nis,
                 'name' => $request->name,
+                'jk'=>$request->jk,
                 'jurusan_id' => $request->jurusan_id
             ]);
 

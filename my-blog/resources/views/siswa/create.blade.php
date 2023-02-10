@@ -32,12 +32,25 @@
                       <div class="mb-4 mt-3">
                         <label for="nama" class="form-label">Nama</label>
                         <input type="text" class="form-control @error('nama') is-invalid @enderror" name="name" id="nama" placeholder="Masukan Nama" value="{{old('nama')}}">
+                        @error('name')
+                        <div class="alert alert-danger mt-3"> 
+                          {{ $message }}
+                        </div> 
+                        @enderror
+                      </div>
+
+                      <div class="mb-3">
+                        <label for="jk" class="form-label">Jenis Kelamin</label>
+                        <select class="form-select" aria-label="Default select example" name="jk" id="jk">
+                        <option value="Laki-Laki">Laki-Laki</option>
+                        <option value="Perempuan">Perempuan</option>
+                        </select>
                       </div>
                       <div class="mb-3 mt-2">
                         <label for="jurusan" class="form-label">Jurusan</label>
                       <select class="form-select" aria-label="Default select example" name="jurusan_id" id="jurusan">
                        @foreach ($jurusans as $jurusan)
-                        <option  value="{{ $jurusan->id }}">{{ $jurusan->name }}</option>
+                        <option value="{{ $jurusan->id }}">{{ $jurusan->name }}</option>
                         @endforeach
                       
                       </select>

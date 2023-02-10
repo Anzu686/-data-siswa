@@ -22,10 +22,10 @@
           <form class="d-flex" action="{{ route('siswa.index') }}">
             <input class="form-control me-2" type="text" placeholder="Cari Siswa" value="{{ request('search') }}" name="search">
             <button class="btn btn-outline-success" type="submit">Cari</button>
-          </form>   
+          </form>  
     </nav> 
     <div class="container mt-5 pt-3 pb-5 justify-content-center">
-        <div class="text-center fs-2 m-4 "> <h2>Data Siswa jurusan {{ $jurusan->name }}</h2></div>
+        <div class="text-center fs-2 "> <h1>Data Siswa</h1></div>
         <div class="row">
             <div class="col-12 justify-content-center">
                 <a href="{{ Route('siswa.create') }}" class="btn btn-success btn-md mb-1">tambah Data</a>
@@ -33,9 +33,9 @@
                     <div class="card-body">
                         <table class="table table-striped ">
                           <thead>
-                            <th>Gambar</th>
                             <th>NIS</th>
                             <th>Nama</th>
+                            <th>Jenis Kelamin</th>
                             <th>Jurusan</th>
                             <th>aksi</th>
                           </thead>
@@ -44,14 +44,15 @@
                        
                         @foreach ($siswas as $siswa)
                             <tr>
-                              <td>{{ Storage::url('/'). $siswa->image }}</td>
                               <td>{{ $siswa->nis }}</td>
                               <td>{{ $siswa->name }}</td>
+                              <td>{{ $siswa->jk }}</td>
                               <td>{{ $siswa->jurusan->name }}</td>
                               <td>
-                              <form action="{{ route('siswa.destroy', $siswa->id) }}" method="post">
+                              <form action="{{ route('siswa.destroy', $siswa->id) }}" method="post" onsubmit="return confirm('yakin?')">
                                 @csrf
-                                <a href="{{ route('siswa.edit', $siswa->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                <a href="{{ route('siswa.show', $siswa->id) }}" class="btn btn-primary btn-sm">Lihat</a>
+                                <a href="{{ route('siswa.edit', $siswa->id) }}" class="btn btn-success btn-sm">Edit</a>
                                 @method('DELETE')
                                 <button class="btn btn-danger btn-sm">Hapus</button>
                               </form>
@@ -65,10 +66,9 @@
                           Belum Ada Data
                         </div>
                         @endif
-                        
+
                     </div>
                 </div>
-                <a href="{{ route('siswa.index') }}" class="btn btn-primary float-right flex-end mt-2">Kembali</a>
             </div>
         </div>
     </div>
