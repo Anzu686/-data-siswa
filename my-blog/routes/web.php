@@ -3,6 +3,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiswaController;
+use App\Models\Jurusan;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,8 +21,14 @@ Route::get('/', function () {
 });
 
 
-Route::get('/posts', function () {
-    return view('home');
-});
 
 Route::resource('/siswa', SiswaController::class);
+
+Route::get('/jurusan/{jurusan:id}', function(Jurusan $jurusan){
+    return view ('jurusan.index',[
+        'jurusans'=>$jurusan::all(),
+        //dd($jurusan::all())
+        'siswas'=>$jurusan->siswa
+    ]);
+  
+})->name('jurusan');

@@ -32,7 +32,7 @@
 
                       <div class="mb-4 mt-3">
                         <label for="nama" class="form-label">Nama</label>
-                        <input type="text" class="form-control @error('nama') is-invalid @enderror" name="name" id="nama" placeholder="Masukan Nama" value="{{old('nama')}}">
+                        <input type="text" class="form-control @error('nama') is-invalid @enderror" name="name" id="nama" placeholder="Masukan Nama" value="{{old('name', $siswa->name)}}">
                       </div>
                       <div class="mb-3 mt-2">
                         <label for="jurusan" class="form-label">Jurusan</label>

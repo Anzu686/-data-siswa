@@ -16,7 +16,6 @@ class SiswaController extends Controller
      */
     public function index()
     {
-       
         $siswa = Siswa::all();
 
         if(request('search')){
@@ -100,14 +99,14 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Siswa $siswa)
     {
         //
         if($request->hasFile('image')){
             $image=$request->file('image');
             $image->store('foto-siswa');
 
-            Siswa::create([
+            $siswa->update([
                 'image'=>$image,
                 'nis'=>$request->nis,
                 'name'=>$request->name,
@@ -115,7 +114,7 @@ class SiswaController extends Controller
             ]);
         }
         else{
-            Siswa::create([
+            $siswa->update([
 
                 'nis' => $request->nis,
                 'name' => $request->name,
