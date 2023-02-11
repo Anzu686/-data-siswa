@@ -39,6 +39,6 @@ class DatabaseSeeder extends Seeder
             'name'=>'Akuntansi dan Keuangan Lembaga'
         ]);
 
-        Siswa::factory(10)->create();
+        Siswa::factory(20)->create();
     }
 }

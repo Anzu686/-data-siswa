@@ -25,7 +25,7 @@
           </form>  
     </nav> 
     <div class="container mt-5 pt-3 pb-5 justify-content-center">
-        <div class="text-center fs-2 "> <h1>Data Siswa</h1></div>
+        <div class="text-center fs-2 "> <h1>Data Siswa</h1> <small>{{ $jurusann }}</small></div>
         <div class="row">
             <div class="col-12 justify-content-center">
                 <a href="{{ Route('siswa.create') }}" class="btn btn-success btn-md mb-1">tambah Data</a>
@@ -68,7 +68,8 @@
                         @endif
 
                     </div>
-                </div>
+                  </div>
+                  <div class="justify-content-end d-flex"><a href="{{ route('siswa.index')  }}" class="btn btn-warning text-white mt-2"> Kembali</a></div>
             </div>
         </div>
     </div>

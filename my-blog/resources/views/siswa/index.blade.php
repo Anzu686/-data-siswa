@@ -37,7 +37,7 @@
                             <th>Nama</th>
                             <th>Jenis Kelamin</th>
                             <th>Jurusan</th>
-                            <th>aksi</th>
+                            <th>Aksi</th>
                           </thead>
                           <tbody>
                         @if ($siswas->count())

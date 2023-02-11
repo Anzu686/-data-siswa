@@ -28,7 +28,8 @@ Route::get('/jurusan/{jurusan:id}', function(Jurusan $jurusan){
     return view ('jurusan.index',[
         'jurusans'=>$jurusan::all(),
         //dd($jurusan::all())
-        'siswas'=>$jurusan->siswa
+        'siswas'=>$jurusan->siswa,
+        'jurusann'=>$jurusan->name
     ]);
   
 })->name('jurusan');

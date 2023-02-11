@@ -14,21 +14,16 @@ class SiswaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, Siswa $siswa)
     {
         
         $siswa = Siswa::all();
+        //dd($request->search);
 
         if($request->search){
-          
-            $siswa =Siswa::where([
-                    [function ($query) use ($request) {
-                    if (($s = $request->search)) {
-                        $query->Where('name', 'LIKE', '%' . $s . '%');
-                             }
-                }]
-            ]);
-       }
+            $siswa = Siswa::where('name' , 'like', '%' . $request->search  .'%' )->get();
+        };
+       
         //
         return view('siswa.index', [
             'siswas'=>$siswa,
