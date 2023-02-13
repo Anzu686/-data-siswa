@@ -12,8 +12,8 @@ class LoginController extends Controller
     }
 
     public function authen(Request $request){
+
        $seseorang= $request->validate([
-           
             'email'=>'required',
             'password'=> 'required',
         ]);

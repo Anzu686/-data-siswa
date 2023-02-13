@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class UserAcces
+class UserAccess
 {
     /**
      * Handle an incoming request.
@@ -18,7 +18,7 @@ class UserAcces
     public function handle(Request $request, Closure $next, $role)
     {
         
-        if(Auth::check() && Auth::user()->role == $role)
+        if(Auth::check() && Auth::user()->type == $role)
         {
             return $next($request);
         }

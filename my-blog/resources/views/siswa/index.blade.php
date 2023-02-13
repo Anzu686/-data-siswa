@@ -8,8 +8,13 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary justify-content-evenly fixed-top">
+      @can('admin')
+      <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+        Punya Admin
+      </a>
+      @endcan
       <div class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Jurusan
               </a>
               <ul class="dropdown-menu">
@@ -32,6 +37,8 @@
              </button>
             </form>
           
+              
+          
           @endauth
           @guest
           <form class="d-flex" action="{{ route('siswa.index') }}">
@@ -45,6 +52,25 @@
           @endguest
       
     </nav> 
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div>
+         woi admin
+        </div>
+        <div class="list-group">
+         
+          <a href="admin/addjurusan" class="list-group-item list-group-item-action">Jurusan</a>
+          <a href="admin/user" class="list-group-item list-group-item-action">Petugas</a>
+          
+        </div>
+
+      </div>
+    </div>
+
     <div class="container mt-5 pt-3 pb-5 justify-content-center">
         <div class="text-center fs-2 "> <h1>Data Siswa</h1></div>
         <div class="row">
