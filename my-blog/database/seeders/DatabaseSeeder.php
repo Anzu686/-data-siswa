@@ -3,8 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\Jurusan;
+use App\Models\User;
 use App\Models\Siswa;
+use App\Models\Jurusan;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -40,5 +41,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Siswa::factory(20)->create();
+        User::factory(10)->create();
     }
 }

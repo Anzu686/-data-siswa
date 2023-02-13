@@ -18,17 +18,40 @@
                 @endforeach
               </ul>
       </div>
-
+      @auth
+     
           <form class="d-flex" action="{{ route('siswa.index') }}">
             <input class="form-control me-2" type="text" placeholder="Cari Siswa" value="{{ request('search') }}" name="search">
             <button class="btn btn-outline-success" type="submit">Cari</button>
           </form>  
+       
+            <form action="/logout" method="post">
+              @csrf
+            <button class="btn btn-danger" type="submit">
+              <b>Logout</b>
+             </button>
+            </form>
+          
+          @endauth
+          @guest
+          <form class="d-flex" action="{{ route('siswa.index') }}">
+            <input class="form-control me-2" type="text" placeholder="Cari Siswa" value="{{ request('search') }}" name="search">
+            <button class="btn btn-outline-success" type="submit">Cari</button>
+          </form>  
+          <a href="/login" class="btn btn-primary" type="submit">
+            <b>login</b>
+           </a>
+         
+          @endguest
+      
     </nav> 
     <div class="container mt-5 pt-3 pb-5 justify-content-center">
         <div class="text-center fs-2 "> <h1>Data Siswa</h1></div>
         <div class="row">
             <div class="col-12 justify-content-center">
+              @auth
                 <a href="{{ Route('siswa.create') }}" class="btn btn-success btn-md mb-1">tambah Data</a>
+                @endauth
                 <div class="card shadow rounded-1">
                     <div class="card-body">
                         <table class="table table-striped ">
@@ -49,13 +72,21 @@
                               <td>{{ $siswa->jk }}</td>
                               <td>{{ $siswa->jurusan->name }}</td>
                               <td>
+                                @auth
+                                    
+                                
                               <form action="{{ route('siswa.destroy', $siswa->id) }}" method="post" onsubmit="return confirm('yakin?')">
                                 @csrf
+                                
                                 <a href="{{ route('siswa.show', $siswa->id) }}" class="btn btn-primary btn-sm">Lihat</a>
                                 <a href="{{ route('siswa.edit', $siswa->id) }}" class="btn btn-success btn-sm">Edit</a>
                                 @method('DELETE')
                                 <button class="btn btn-danger btn-sm">Hapus</button>
                               </form>
+                              @endauth
+                              @guest
+                                <a href="{{ route('siswa.show', $siswa->id) }}" class="btn btn-primary btn-sm">Lihat</a>
+                              @endguest
                               </td>
                             </tr>
                         @endforeach
@@ -69,6 +100,7 @@
 
                     </div>
                 </div>
+               
             </div>
         </div>
     </div>

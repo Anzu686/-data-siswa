@@ -14,7 +14,7 @@
                
                 <div class="card shadow rounded-1">
                     <div class="card-body">
-                        
+
                         <div class="card w-100" >
                             <img src="{{ asset('storage/'.$siswa->image) }}" class="card-img-top" >
 

@@ -18,17 +18,42 @@
                 @endforeach
               </ul>
       </div>
-
+      @auth
+     
           <form class="d-flex" action="{{ route('siswa.index') }}">
             <input class="form-control me-2" type="text" placeholder="Cari Siswa" value="{{ request('search') }}" name="search">
             <button class="btn btn-outline-success" type="submit">Cari</button>
           </form>  
+       
+            <form action="/logout" method="post">
+              @csrf
+            <button class="btn btn-danger" type="submit">
+              <b>Logout</b>
+             </button>
+            </form>
+          
+          @endauth
+          @guest
+          <form class="d-flex" action="{{ route('siswa.index') }}">
+            <input class="form-control me-2" type="text" placeholder="Cari Siswa" value="{{ request('search') }}" name="search">
+            <button class="btn btn-outline-success" type="submit">Cari</button>
+          </form>  
+          <a href="/login" class="btn btn-primary" type="submit">
+            <b>login</b>
+           </a>
+         
+          @endguest
+      
     </nav> 
     <div class="container mt-5 pt-3 pb-5 justify-content-center">
-        <div class="text-center fs-2 "> <h1>Data Siswa</h1> <small>{{ $jurusann }}</small></div>
+        <div class="text-center fs-2 "> <h1>Data Siswa</h1> <small>{{ $jurusan->name }}</small></div><br>
         <div class="row">
             <div class="col-12 justify-content-center">
-                <a href="{{ Route('siswa.create') }}" class="btn btn-success btn-md mb-1">tambah Data</a>
+              @auth
+                  
+              <a href="{{ Route('siswa.create') }}" class="btn btn-success btn-md mb-1">tambah Data</a>
+              @endauth
+
                 <div class="card shadow rounded-1">
                     <div class="card-body">
                         <table class="table table-striped ">
@@ -37,7 +62,7 @@
                             <th>Nama</th>
                             <th>Jenis Kelamin</th>
                             <th>Jurusan</th>
-                            <th>aksi</th>
+                            <th>Aksi</th>
                           </thead>
                           <tbody>
                         @if ($siswas->count())
@@ -49,13 +74,21 @@
                               <td>{{ $siswa->jk }}</td>
                               <td>{{ $siswa->jurusan->name }}</td>
                               <td>
+                                @auth
+                                    
+                                
                               <form action="{{ route('siswa.destroy', $siswa->id) }}" method="post" onsubmit="return confirm('yakin?')">
                                 @csrf
+                                
                                 <a href="{{ route('siswa.show', $siswa->id) }}" class="btn btn-primary btn-sm">Lihat</a>
                                 <a href="{{ route('siswa.edit', $siswa->id) }}" class="btn btn-success btn-sm">Edit</a>
                                 @method('DELETE')
                                 <button class="btn btn-danger btn-sm">Hapus</button>
                               </form>
+                              @endauth
+                              @guest
+                                <a href="{{ route('siswa.show', $siswa->id) }}" class="btn btn-primary btn-sm">Lihat</a>
+                              @endguest
                               </td>
                             </tr>
                         @endforeach
@@ -68,8 +101,10 @@
                         @endif
 
                     </div>
-                  </div>
-                  <div class="justify-content-end d-flex"><a href="{{ route('siswa.index')  }}" class="btn btn-warning text-white mt-2"> Kembali</a></div>
+                </div>
+                <div class="d-flex justify-content-end">
+                <a href="{{ route('siswa.index') }}" class="btn btn-primary mt-2">Kembali</a>
+              </div>
             </div>
         </div>
     </div>
