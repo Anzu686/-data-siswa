@@ -30,7 +30,10 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('admin', function(User $user){
             
         //    / dd($user);
-            return $user->type=1;
+
+            
+            return $user->tipe==="2";
+
         });
     }
 }

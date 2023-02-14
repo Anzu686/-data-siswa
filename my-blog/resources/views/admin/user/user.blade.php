@@ -13,21 +13,12 @@
         Punya Admin
       </a>
       @endcan
-      <div class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Jurusan
-              </a>
-              <ul class="dropdown-menu">
-                @foreach($jurusans as $jurusan)
-                <li><a class="dropdown-item" href="{{ route('jurusan', $jurusan->id) }}">{{ $jurusan->name }}</a></li>
-                @endforeach
-              </ul>
-      </div>
+    
       @auth
      
-          <form class="d-flex" action="{{ route('siswa.index') }}">
-            <input class="form-control me-2" type="text" placeholder="Cari Siswa" value="{{ request('search') }}" name="search">
-            <button class="btn btn-outline-success" type="submit">Cari</button>
+          <form class="d-flex" action="{{ route('user') }}">
+            <input class="form-control me-2" type="text" placeholder="Cari User" value="{{ request('search') }}" name="search">
+            <button class="btn btn-outline-success" type="submit">Cari </button>
           </form>  
        
             <form action="/logout" method="post">
@@ -43,19 +34,19 @@
         
       
     </nav> 
+  
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
+        <a href="{{ route('siswa.index') }}">
+          <h3 class="offcanvas-title" id="offcanvasExampleLabel" class="text-decoration-none">Siswa</h3></a>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
-        <div>
-         woi admin
-        </div>
+        
         <div class="list-group">
          
-          <a href="admin/addjurusan" class="list-group-item list-group-item-action">Jurusan</a>
-          <a href="admin/user" class="list-group-item list-group-item-action">Petugas</a>
+          <a href="{{ url('admin/addjurusan') }}"class="list-group-item list-group-item-action">Jurusan</a>
+          <a href="{{ route('user') }}" class="list-group-item list-group-item-action">Petugas</a>
           
         </div>
 
@@ -63,6 +54,9 @@
     </div>
 
     <div class="container mt-5 pt-3 pb-5 justify-content-center">
+      <div class="row g-2">
+        <div class="col-3">now login : {{ auth()->user()->name }}</div>
+      </div>
         <div class="text-center fs-2 "> <h1>Data User</h1></div>
         <div class="row">
             <div class="col-12 justify-content-center">
@@ -87,10 +81,13 @@
                             
                               <td>{{ $user->name }}</td>
                               {{-- {{ dd($user) }} --}}
-                              <td>{{$user->type === 1 ? 'admin' : 'petugas' }}  </td>
-                             
+
+
+                              {{-- <form action="user" method="post"></form> --}}
+                              
+                              <td>{{$user->tipe === "2" ? 'admin' : 'petugas' }}  </td>
                            
-                              <td>
+                               <td>
                               <a href="{{ route('updateuse', $user->id) }}" class="btn btn-success">Edit</a>
                               </td>
                             </tr>

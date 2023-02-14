@@ -8,7 +8,7 @@
   </head>
   <body>
     <div class="container mt-5 pt-3 pb-5 justify-content-center">
-        <div class="text-center fs-2 "> <h1>Tambah Data Siswa</h1></div>
+        <div class="text-center fs-2 "> <h1>updateuser</h1></div>
         <div class="row">
             <div class="col-12 justify-content-center">
                
@@ -29,18 +29,13 @@
                         </div> 
                         @enderror
                       </div>
-s
 
                       <div class="mb-3 mt-2">
                         <label for="jurusan" class="form-label">Akses</label>
-                      <select class="form-select" aria-label="Default select example" name="type" id="jurusan">
-                     
-                        <option value="0">Petugas</option>
-                        <option value="1">Admin</option>
-                    
-                       
-                      
-                      </select>
+                      <select class="form-select" name="tipe" id="jurusan">
+                        <option value="1">Petugas</option>
+                        <option value="2">Admin</option>
+                        </select>
                     </div>
                     <div class="col justify-content-end d-flex">
                       <button type="reset" class="btn btn-warning" >Reset</button>

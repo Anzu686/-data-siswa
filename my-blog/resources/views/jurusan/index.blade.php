@@ -46,7 +46,10 @@
       
     </nav> 
     <div class="container mt-5 pt-3 pb-5 justify-content-center">
-        <div class="text-center fs-2 "> <h1>Data Siswa</h1> <small>{{ $jurusan->name }}</small></div><br>
+      <div class="row g-2">
+        <div class="col-6">now login : {{ auth()->user()->name }} as {{ auth()->user()->tipe ==="1"?"Petugas":"Admin" }}</div>
+      </div>
+        <div class="text-center fs-2 "> <h1>Data Siswa</h1> <small>{{ $jurusann }}</small></div><br>
         <div class="row">
             <div class="col-12 justify-content-center">
               @auth
@@ -88,7 +91,7 @@
                               @endauth
                               @guest
                                 <a href="{{ route('siswa.show', $siswa->id) }}" class="btn btn-primary btn-sm">Lihat</a>
-                              @guest
+                              @endguest
                               </td>
                             </tr>
                         @endforeach
@@ -102,9 +105,9 @@
 
                     </div>
                 </div>
-                <div class="d-flex justify-content-end">
-                <a href="{{ route('siswa.index') }}" class="btn btn-primary mt-2">Kembali</a>
               </div>
+              <div class="d-flex justify-content-end">
+              <a href="{{ route('siswa.index') }}" class="btn btn-primary mt-2">Kembali</a>
             </div>
         </div>
     </div>

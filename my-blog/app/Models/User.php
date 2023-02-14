@@ -45,10 +45,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    protected function type(): Attribute
-    {
-        return new Attribute(
-            get: fn ($value) =>  ["petugas", "admin"][$value],
-        );
-    }
+    // protected function tipe(): Attribute
+    // {
+    //     return new Attribute(
+    //         get: fn ($value) =>["petugas", "admin"][$value],
+    //     );
+    // }
 }

@@ -23,7 +23,7 @@ class SiswaFactory extends Factory
             'name'=>fake()->name('male'|'female') ,
             'jk'=>fake()->randomElement(['Laki-Laki', 'Perempuan']),
             'nis'=>fake()->randomNumber(5, true),
-            'jurusan_id'=>fake()->numberBetween(1,2)
+            'jurusan_id'=>fake()->numberBetween(1,4)
         ];
     }
 }

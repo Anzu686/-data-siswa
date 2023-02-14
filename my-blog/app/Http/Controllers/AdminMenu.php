@@ -15,28 +15,45 @@ class AdminMenu extends Controller
 
     public function store_jurusan(Request $request){
         $this->validate($request,[
-            'name'=>'require|min:3'
+            'name'=>'required|min:3'
         ]);
         Jurusan::create(['name'=>$request->name]);
 
         return to_route('siswa.index')->with('succes', 'Jurusan Berhasil Ditambah');
     }
 
-    public function edit_user(){
-        return view ('admin.user.user', ['users'=>User::all(),'jurusans'=>Jurusan::all()]);
-    }
+    public function edit_user(Request $request){
 
-    public function update_user(Request $request, User $user){
-        
 
-        $user->update([
-            'type' => $request->type,
+        $users = User::all();
+        if($request->search){
+            $users = User::where('name' , 'like', '%' . $request->search  .'%' )->get();
+        };
+       
+        //
+       
+        return view ('admin.user.user', [
+            'users'=>$users,
+            'jurusans'=>Jurusan::all()
         ]);
-
-        return to_route('admin.user.user')->with('succes', 'data berhasil diubah');
     }
-
+    
     public function update(User $user){
-        return view ('admin/user/update', ['user'=>$user]);
+        return view ('admin.user.update', ['user'=>$user]);
+    }
+    
+    public function update_user(Request $request, User $user){
+
+        //dd($request);
+        $this->validate($request,[
+            'tipe'=>'required'
+        ]);
+        $user->update([
+            "name" => $request->name,
+            "tipe"=>$request->tipe
+        ]);
+        //dd($user);
+
+        return to_route('user')->with('succes', 'data berhasil diubah');
     }
 }

@@ -8,7 +8,10 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary justify-content-evenly fixed-top">
+    
       @can('admin')
+          
+  
       <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
         Punya Admin
       </a>
@@ -53,14 +56,12 @@
       
     </nav> 
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
+      <div class="offcanvas-header"><a href="{{ route('siswa.index') }}" class="text-decoration-none">
+        <h3 class="offcanvas-title" id="offcanvasExampleLabel">Siswa</h3></a>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
-        <div>
-         woi admin
-        </div>
+        
         <div class="list-group">
          
           <a href="admin/addjurusan" class="list-group-item list-group-item-action">Jurusan</a>
@@ -72,6 +73,9 @@
     </div>
 
     <div class="container mt-5 pt-3 pb-5 justify-content-center">
+      <div class="row g-2">
+        <div class="col-6">now login : {{ auth()->user()->name }} as {{ auth()->user()->tipe ==="1"?"Petugas":"Admin" }}</div>
+      </div>
         <div class="text-center fs-2 "> <h1>Data Siswa</h1></div>
         <div class="row">
             <div class="col-12 justify-content-center">

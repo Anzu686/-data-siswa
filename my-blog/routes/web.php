@@ -38,17 +38,17 @@ Route::get('/', function () {
   
 // })->name('jurusan');
 
-Route::get('/registrasi',[RegistrasiController::class,'index']);
+Route::get('/registrasi',[RegistrasiController::class,'index'])->middleware('guest');
 Route::post('/registrasi',[RegistrasiController::class,'store']);
 
 
-Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');;
 Route::post('/login', [LoginController::class, 'authen']);
 Route::post('/logout', [LoginController::class, 'logout']);
 
 
   
-Route::resource('/siswa', SiswaController::class)->middleware('auth');
+Route::resource('/siswa', SiswaController::class);
 
 
 
@@ -60,13 +60,13 @@ Route::get('/jurusan/{jurusan:id}', function(Jurusan $jurusan){
         'jurusann'=>$jurusan->name
     ]);
   
-})->name('jurusan')->middleware('auth');        
+})->name('jurusan');        
 
-Route::middleware(['auth', 'userAccess:admin'])->group(function () {
+Route::middleware(['auth', 'userAccess:2'])->group(function () {
     Route::get('admin/addjurusan', [AdminMenu::class, 'add_jurusan']);
     Route::post('admin/addjurusan', [AdminMenu::class, 'store_jurusan']);
     //Route::post('/admin/updatepetugas', AdminMenu::class);
-    Route::get('admin/user', [AdminMenu::class, 'edit_user']);
+    Route::get('admin/user', [AdminMenu::class, 'edit_user'])->name('user');
 
     Route::get('admin/user/{user:id}',[AdminMenu::class, 'update'])->name('updateuse');
     Route::post('admin/user/{user:id}', [AdminMenu::class, 'update_user'])->name('updateuser');
